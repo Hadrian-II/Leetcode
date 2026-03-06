@@ -2,6 +2,8 @@ package helpers
 
 class ListNode(var `val`: Int) {
     var next: ListNode? = null
+    var previous: ListNode? = null
+    var anyVal: Any? = null
 
     override fun toString(): String {
         return `val`.toString()
