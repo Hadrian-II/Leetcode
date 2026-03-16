@@ -1,9 +1,10 @@
 package leetcode
 
+import helpers.printIntArray
+
 fun main() {
-    val r1 = productExceptSelf(intArrayOf(1,2,3,4))     // [24,12,8,6]
-    val r2 = productExceptSelf(intArrayOf(-1,1,0,-3,3)) // [0,0,9,0,0]
-    val blorp = 4
+    printIntArray( productExceptSelf(intArrayOf(1,2,3,4)))     // [24,12,8,6]
+    printIntArray(productExceptSelf(intArrayOf(-1,1,0,-3,3)))  // [0,0,9,0,0]
 }
 
 fun productExceptSelf(nums: IntArray): IntArray {
