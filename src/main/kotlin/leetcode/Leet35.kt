@@ -23,5 +23,5 @@ fun searchInsert(nums: IntArray, target: Int): Int {
         }
     }
 
-    return result + 1
+    return if(nums[result] > target) result else result + 1
 }
