@@ -1,23 +1,36 @@
 package leetcode
 
+import helpers.printIntArray
+
 fun main() {
-    println(letterCombinations("23"))
-    println(letterCombinations("2"))
+    val i1 = intArrayOf(2,0,2,1,1,0)
+    sortColors(i1)
+    printIntArray(i1)
+
+    val i2 = intArrayOf(2,0,1)
+    sortColors(i2)
+    printIntArray(i2)
 }
 
-fun letterCombinations(digits: String): List<String> {
-    val digitMap = HashMap<Char, CharArray>()
-    digitMap['2'] = charArrayOf('a', 'b', 'c')
-    digitMap['3'] = charArrayOf('d', 'e', 'f')
-    digitMap['4'] = charArrayOf('g', 'h', 'i')
-    digitMap['5'] = charArrayOf('j', 'k', 'l')
-    digitMap['6'] = charArrayOf('m', 'n', 'o')
-    digitMap['7'] = charArrayOf('p', 'q', 'r', 's')
-    digitMap['8'] = charArrayOf('t', 'u', 'v')
-    digitMap['9'] = charArrayOf('w', 'x', 'y', 'z')
-    var results = listOf(charArrayOf())
-    for (digit in digits) {
-        results = digitMap[digit]!!.flatMap { char -> results.map { str -> str + char } }
+fun sortColors(nums: IntArray): Unit {
+    var blueCount = 0
+    var whiteCount = 0
+    var redCount = 0
+    for (num in nums) {
+        when(num) {
+            0 -> redCount++
+            1 -> whiteCount++
+            2 -> blueCount++
+        }
     }
-    return results.map { it.joinToString("") }
+    var i = 0
+    for(x in 0..<redCount) {
+        nums[i++] = 0
+    }
+    for(x in 0..<whiteCount) {
+        nums[i++] = 1
+    }
+    for(x in 0..<blueCount) {
+        nums[i++] = 2
+    }
 }
