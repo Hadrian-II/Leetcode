@@ -38,6 +38,10 @@ fun printIntArray(array: IntArray) {
     println(array.joinToString(",") { it.toString() })
 }
 
+fun printLongArray(array: LongArray) {
+    println(array.joinToString(",") { it.toString() })
+}
+
 fun printDoubleArray(array: DoubleArray) {
     println(array.joinToString(",") { it.toString() })
 }
