@@ -54,7 +54,7 @@ fun readInput(input: String): Array<IntArray> {
 
 fun readArrayOfArrays(input: String): Array<IntArray> {
     return input.trim('[').trim(']').split("],[")
-                .map { it.split(',').map { n -> n.toInt() }.toIntArray() }.toTypedArray()
+                .map { it.split(',').map { n -> n.trim().toInt() }.toIntArray() }.toTypedArray()
 }
 
 fun readArrayOfCharArrays(input: String): Array<CharArray> {
