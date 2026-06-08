@@ -1,0 +1,42 @@
+package leetcode
+
+import kotlin.math.pow
+
+fun main () {
+    findRepeatedDnaSequences("AAAAACCCCCAAAAACCCCCCAAAAAGGGTTT").forEach { println(it) }
+    println('X')
+    findRepeatedDnaSequences("AAAAAAAAAAAAA").forEach { println(it) }
+    println('X')
+    findRepeatedDnaSequences("AAAAAAAAAAA").forEach { println(it) }
+    println('X')
+    findRepeatedDnaSequences("TGCTCCTGTCACAACTTCTTTACCAGCCTGTTTTTCTAGAGTCGGCTCAAAACCTGCCTTTATGCGCAGCTGTCCACGAGAATTTCATGTTATCGAGGACCGCGATATACCCAATCGCGCGCCCCAGAAAAAAGAGTCTTACCAGATGTATACGGTGACGACCCAGTGGGTAAGACCGCTCTGCTCAGCGACCCGTCCATACCCACAGTCAGCCATGTGTGACATATCAGCGTGCATTCTTGATCTGTATGGGTGCGCTGCCCCCGCACTTGATGGGGTATGTGATGACTCCGCTCGGTAAGCAAGACCCTGGGGGTTCGGACGTAGGGTATACCCGAACTTCACGTATGCGGACACCAACGCACGTGCCAATTTATCTAACGTATGTCTCCATGCCGCCCAGAAGGTTAAAGTGGACCGCCGTTCGTATACTGTTTCTGCAATTGTGTGCGGCAGCACCAGGTAGAGAGCATTCTATTTCGCTAGCTAGTAAATCTACTTCACCGAGTCTGGAAGCTCCAATCGCTGTTTACAAACTTTTTGCCCCTGCGTGGGTCAGGCCATGTCCCGTTCCCGAGGATTCTAGCACTGACCTAGCCCTATATCACGAGCCGGGTTTTCTTAAAATAGAGATCGGGACGTTAAGGTCTTATGAACGGCTTCAGCTATCTTCCGCTTACCAACTGAGCCGAACTATCTCCGGGTGTTACATGGATCCTAAAATGCTCTCCAATTTTGCCCCTGCATGGTATTTCTCTTGAGACTACTGGATCTACCTGGGTTGTGCATGTTTCGTGTCTCTTCCGACGTTCGACAATTGGGGGCGACGCTTTAAGTTCTACTACGGTGAGATGCACATCCCACGGACGCCCTTTTCCTTTGGCTCTTCCTACGTTCGCGAGCGGTCCTGTAGGACAGTTGCTTTATGCCAACTTTTACGAGGGTGGAATACAGTATCGCCATGACACTCTGAAAAAGGATGGAAGACCTGAGATTCACC").forEach { println(it) }
+}
+
+fun findRepeatedDnaSequences(s: String): List<String> {
+    var rolling = 0
+    val map = HashMap<Int, Pair<Int,Int>>()
+    val mask = 2.0.pow(20.0).toInt() - 1
+    for (i in s.indices) {
+        rolling = rolling.shl(2)
+        rolling += getCode(s[i])
+        rolling = rolling and mask
+        if (i >= 9) {
+            if (rolling in map) {
+                val current = map[rolling]!!
+                map[rolling] = Pair(current.first, current.second + 1)
+            } else {
+                map[rolling] = Pair(i - 9, 1)
+            }
+        }
+    }
+    return map.values.filter { it.second > 1 }.map { s.substring(it.first, it.first + 10) }
+}
+
+fun getCode(segment: Char): Int {
+    return when(segment) {
+        'A' -> 0
+        'C' -> 1
+        'G' -> 2
+        else -> 3 // 'T'
+    }
+}
