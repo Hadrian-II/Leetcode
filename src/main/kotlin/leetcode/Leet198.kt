@@ -11,21 +11,22 @@ fun main() {
 
 class Solution198 {
     lateinit var nums: IntArray
-    val memo = HashMap<Int, Int>()
+    lateinit var memo: IntArray
     fun rob(nums: IntArray): Int {
+        if (nums.size < 3) {
+            return nums.max()
+        }
         this.nums = nums
-        return rob(0)
+        this.memo = IntArray(nums.size) { -1 }
+        memo[0] = nums[0]
+        memo[1] = max(nums[0], nums[1])
+        return rob(nums.lastIndex)
     }
 
     fun rob(i: Int): Int {
-        return memo.getOrPut(i) {
-            if (i > nums.lastIndex) {
-                0
-            } else if (i == nums.lastIndex) {
-                nums[nums.lastIndex]
-            } else {
-                max(rob(i + 1), nums[i] + rob(i + 2))
-            }
+        if (memo[i] == -1) {
+            memo[i] = max(rob(i - 1), nums[i] + rob(i - 2))
         }
+        return memo[i]
     }
 }
