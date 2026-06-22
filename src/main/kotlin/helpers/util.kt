@@ -46,12 +46,6 @@ fun printDoubleArray(array: DoubleArray) {
     println(array.joinToString(",") { it.toString() })
 }
 
-fun readInput(input: String): Array<IntArray> {
-    return Regex("\\[-?\\d+,-?\\d+]").findAll(input)
-        .map { it.value.substring(1, it.value.length - 1).split(",") }
-        .map { intArrayOf(it[0].toInt(), it[1].toInt())}.toList().toTypedArray()
-}
-
 fun readArrayOfArrays(input: String): Array<IntArray> {
     return input.trim('[').trim(']').split("],[")
                 .map { it.split(',').map { n -> n.trim().toInt() }.toIntArray() }.toTypedArray()
