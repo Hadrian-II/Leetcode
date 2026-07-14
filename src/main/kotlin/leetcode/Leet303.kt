@@ -7,7 +7,7 @@ fun main() {
     println(t.sumRange(0, 5))
 }
 
-class NumArray(nums: IntArray) {
+class NumArray303(nums: IntArray) {
 
     private val pre: IntArray = IntArray(nums.size)
 
