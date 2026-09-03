@@ -4,21 +4,21 @@ fun main() {
 
 }
 
-class Node(var `val`: Int) {
-     var left: Node? = null
-     var right: Node? = null
-     var next: Node? = null
-     var random: Node? = null
+class Node138(var `val`: Int) {
+     var left: Node138? = null
+     var right: Node138? = null
+     var next: Node138? = null
+     var random: Node138? = null
 }
 
-fun copyRandomList(node: Node?): Node? {
+fun copyRandomList(node: Node138?): Node138? {
     if (node == null) {
         return null
     }
-    val nodeMap = HashMap<Node, Node>()
+    val nodeMap = HashMap<Node138, Node138>()
     var current = node
     while (current != null) {
-        nodeMap[current] = Node(current.`val`)
+        nodeMap[current] = Node138(current.`val`)
         current = current.next
     }
     current = node

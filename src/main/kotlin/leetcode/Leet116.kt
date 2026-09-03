@@ -5,9 +5,9 @@ fun main() {
 }
 
 class Solution116 {
-    val nextRights = mutableMapOf<Int, Node>()
+    val nextRights = mutableMapOf<Int, Node138>()
 
-    fun connect(root: Node?): Node? {
+    fun connect(root: Node138?): Node138? {
         if (root != null) {
             map(root, 0)
         }
@@ -15,7 +15,7 @@ class Solution116 {
         return root
     }
 
-    fun map(node: Node, level: Int) {
+    fun map(node: Node138, level: Int) {
         if (node.left != null) {
             if (nextRights[level] != null) {
                 node.right!!.next = nextRights[level]
