@@ -14,17 +14,29 @@ fun pathSum(root: TreeNode?, targetSum: Int): Int {
     if (root == null) {
         return 0
     }
-    return nodeSum(root, LongArray(0), targetSum.toLong())
+    return nodeSum(root, emptyList(), targetSum.toLong())
 }
 
-fun nodeSum(node: TreeNode, currentSums: LongArray, targetSum: Long): Int {
+fun nodeSum(node: TreeNode, currentSums: List<Long>, targetSum: Long): Int {
     var count = 0
-    val sums = currentSums.map { it + node.`val` }.toLongArray() + longArrayOf(node.`val`.toLong())
-    if (node.left != null) {
-        count += nodeSum(node.left!!, sums, targetSum)
+
+    val sums = ArrayList<Long>(currentSums.size + 1)
+    for (sum in currentSums) {
+        val newSum = sum + node.`val`
+        if (newSum == targetSum) {
+            count++
+        }
+        sums.add(newSum)
     }
-    if (node.right != null) {
-        count += nodeSum(node.right!!, sums, targetSum)
+
+    val current = node.`val`.toLong()
+    if (current == targetSum) {
+        count ++
     }
-    return count + sums.count { it == targetSum }
+    sums.add(current)
+
+    node.left?.let { count += nodeSum(it, sums, targetSum) }
+    node.right?.let { count += nodeSum(it, sums, targetSum) }
+
+    return count
 }

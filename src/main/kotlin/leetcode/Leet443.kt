@@ -11,24 +11,28 @@ fun compress(chars: CharArray): Int {
     var current: Char? = null
     var count = 1
     var ptr = 0
-    for (char in chars + charArrayOf(1.toChar())) {
+    for (char in chars) {
         if (current == null) {
             current = char
         } else {
             if (current == char) {
-                count += 1
+                count++
             } else {
-                chars[ptr] = current
+                chars[ptr++] = current
                 current = char
-                ptr += 1
                 if (count > 1) {
                     count.toString().forEach {
-                        chars[ptr] = it
-                        ptr += 1
+                        chars[ptr++] = it
                     }
                     count = 1
                 }
             }
+        }
+    }
+    chars[ptr++] = current!!
+    if (count > 1) {
+        count.toString().forEach {
+            chars[ptr++] = it
         }
     }
     println(chars)

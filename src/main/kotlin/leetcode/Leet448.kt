@@ -6,13 +6,15 @@ fun main() {
 }
 
 fun findDisappearedNumbers(nums: IntArray): List<Int> {
-    val frequency = IntArray(nums.size + 1)
+    val frequency = BooleanArray(nums.size + 1)
     for (num in nums) {
-        frequency[num]++
+        if (!frequency[num]) {
+            frequency[num] = true
+        }
     }
     val result = ArrayList<Int>()
     for (i in 1..frequency.lastIndex) {
-        if (frequency[i] == 0) {
+        if (!frequency[i]) {
             result.add(i)
         }
     }
